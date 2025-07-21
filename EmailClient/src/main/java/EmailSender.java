@@ -22,8 +22,8 @@ public class EmailSender {
         final String username = props.getProperty("mail.smtp.username");
         final String password = props.getProperty("mail.smtp.password");
 
-        String fromEmail = "support@tatua.go.ke";
-        String toEmail = "jadeogweno@gmail.com";
+        String fromEmail = "support@tatua.com";
+        String toEmail = "william.ochomo@skyworld.co.ke";
 
         InputStream imageStream = EmailSender.class.getClassLoader().getResourceAsStream("assets/tatua-logo.png");
         if (imageStream == null) throw new FileNotFoundException("Image not found");
@@ -40,17 +40,17 @@ public class EmailSender {
             Context context = new Context();
             context.setVariable("firstName", "William");
             context.setVariable("setupLink", "https://www.google.com");
-            // String html = templateEngine.process("welcome-email.html", context);
-            // String html = templateEngine.process("trial-expiration.html", context);
-            String html = templateEngine.process("product-update-newsletter.html", context);
+            //String html = templateEngine.process("welcome-email.html", context);
+            String html = templateEngine.process("trial-expiration.html", context);
+            //String html = templateEngine.process("product-update-newsletter.html", context);
 
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail, "Tatua Support"));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
             // message.setSubject("Welcome to Tatua - Let's Get Started");
-            // message.setSubject("Your Tatua Trial Expires Tomorrow - Don't Lose Your Data ");
-            message.setSubject(" New Features: AI- Powered Ticket Routing & More ");
+            message.setSubject("Your Tatua Trial Expires Tomorrow - Don't Lose Your Data ");
+            //message.setSubject(" New Features: AI- Powered Ticket Routing & More ");
 
             MimeBodyPart htmlBodyPart = new MimeBodyPart();
             htmlBodyPart.setContent(html, "text/html; charset=utf-8");
